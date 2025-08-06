@@ -1,0 +1,53 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    background-color: #0d0d1a;
+    color: #e6e6ff;
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#game-container {
+    display: flex;
+    border: 2px solid #5a5a8e;
+    box-shadow: 0 0 20px #5a5a8e;
+}
+
+#gameCanvas {
+    background-color: #1a1a33;
+}
+
+#ui-container {
+    width: 250px;
+    padding: 10px;
+    background-color: #2a2a47;
+    border-left: 2px solid #5a5a8e;
+}
+
+#stats p {
+    margin: 5px 0;
+}
+
+#inventory-container, #crafting-container {
+    margin-top: 20px;
+}
+
+#inventory-list, #crafting-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+#crafting-list li {
+    cursor: pointer;
+    padding: 5px;
+    background-color: #3b3b64;
+    margin-bottom: 5px;
+    border-radius: 3px;
+}
+
+#crafting-list li:hover {
+    background-color: #4c4c7c;
+}
