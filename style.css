@@ -3,7 +3,7 @@ body {
     overflow: hidden;
     background-color: #0d0d1a;
     color: #e6e6ff;
-    font-family: sans-serif;
+    font-family: 'Courier New', monospace;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -25,6 +25,7 @@ body {
     padding: 10px;
     background-color: #2a2a47;
     border-left: 2px solid #5a5a8e;
+    overflow-y: auto;
 }
 
 #stats p {
@@ -40,14 +41,16 @@ body {
     padding: 0;
 }
 
-#crafting-list li {
-    cursor: pointer;
+#crafting-list li, #inventory-list li {
     padding: 5px;
     background-color: #3b3b64;
     margin-bottom: 5px;
     border-radius: 3px;
+    display: flex;
+    justify-content: space-between;
 }
 
 #crafting-list li:hover {
     background-color: #4c4c7c;
+    cursor: pointer;
 }
