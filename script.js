@@ -1,88 +1,56 @@
-// Game variables and setup
-const canvas = document.getElementById('gameCanvas');
-const ctx = canvas.getContext('2d');
-const TILE_SIZE = 32;
-const MAP_WIDTH = 50;
-const MAP_HEIGHT = 50;
-
-// Player data
-const player = {
-    x: MAP_WIDTH / 2 * TILE_SIZE,
-    y: MAP_HEIGHT / 2 * TILE_SIZE,
-    speed: 5,
-    health: 100,
-    hunger: 100,
-    stamina: 100,
-    inventory: {}
-};
-
-// Map generation (simple for now)
-const map = [];
-for (let y = 0; y < MAP_HEIGHT; y++) {
-    map[y] = [];
-    for (let x = 0; x < MAP_WIDTH; x++) {
-        map[y][x] = Math.random() < 0.2 ? 'tree' : 'grass';
-    }
+body {
+    margin: 0;
+    overflow: hidden;
+    background-color: #0d0d1a;
+    color: #e6e6ff;
+    font-family: 'Courier New', monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-// Game loop
-function gameLoop() {
-    update();
-    render();
-    requestAnimationFrame(gameLoop);
+#game-container {
+    display: flex;
+    border: 2px solid #5a5a8e;
+    box-shadow: 0 0 20px #5a5a8e;
 }
 
-// Update game state
-function update() {
-    // Player movement
-    if (keys.w) player.y -= player.speed;
-    if (keys.s) player.y += player.speed;
-    if (keys.a) player.x -= player.speed;
-    if (keys.d) player.x += player.speed;
-
-    // Boundary checks
-    player.x = Math.max(0, Math.min(canvas.width - TILE_SIZE, player.x));
-    player.y = Math.max(0, Math.min(canvas.height - TILE_SIZE, player.y));
-    
-    // Simple hunger and stamina drain
-    player.hunger = Math.max(0, player.hunger - 0.01);
-    player.stamina = Math.max(0, player.stamina - 0.05);
-
-    // Update UI
-    document.getElementById('health').textContent = Math.floor(player.health);
-    document.getElementById('hunger').textContent = Math.floor(player.hunger);
-    document.getElementById('stamina').textContent = Math.floor(player.stamina);
+#gameCanvas {
+    background-color: #1a1a33;
 }
 
-// Render game
-function render() {
-    // Clear canvas
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Render map
-    for (let y = 0; y < MAP_HEIGHT; y++) {
-        for (let x = 0; x < MAP_WIDTH; x++) {
-            const tile = map[y][x];
-            if (tile === 'grass') {
-                ctx.fillStyle = '#445533';
-            } else if (tile === 'tree') {
-                ctx.fillStyle = '#112200';
-            }
-            ctx.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
-        }
-    }
-
-    // Render player
-    ctx.fillStyle = '#00aaff';
-    ctx.fillRect(player.x, player.y, TILE_SIZE, TILE_SIZE);
+#ui-container {
+    width: 250px;
+    padding: 10px;
+    background-color: #2a2a47;
+    border-left: 2px solid #5a5a8e;
+    overflow-y: auto;
 }
 
-// Handle user input
-const keys = {};
-window.addEventListener('keydown', (e) => keys[e.key.toLowerCase()] = true);
-window.addEventListener('keyup', (e) => keys[e.key.toLowerCase()] = false);
+#stats p {
+    margin: 5px 0;
+}
 
-// Initial setup
-canvas.width = 800;
-canvas.height = 600;
-gameLoop();
+#inventory-container, #crafting-container {
+    margin-top: 20px;
+}
+
+#inventory-list, #crafting-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+#crafting-list li, #inventory-list li {
+    padding: 5px;
+    background-color: #3b3b64;
+    margin-bottom: 5px;
+    border-radius: 3px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#crafting-list li:hover {
+    background-color: #4c4c7c;
+    cursor: pointer;
+}
